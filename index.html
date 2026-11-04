@@ -50,6 +50,24 @@ button,input,select{font-family:inherit}
 .foot{padding:40px 56px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9A9891}
 .line{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:15px}
 .panel{border:1px solid rgba(255,255,255,.08);padding:36px;background:#101010}
+.herowrap{position:relative;overflow:hidden}
+.herobg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.2;filter:grayscale(1) contrast(1.05);pointer-events:none}
+.herowrap::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,12,12,.92) 0%,rgba(12,12,12,.6) 60%,rgba(12,12,12,.85) 100%),linear-gradient(180deg,transparent 60%,#0C0C0C 100%);pointer-events:none}
+.herowrap>.hero{z-index:1}
+.photo{height:260px;margin:-8px 0 28px;border:1px solid rgba(255,255,255,.08);background:#141414;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tile{position:relative;padding:0}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .3s;filter:grayscale(.25)}
+.tile:hover img{transform:scale(1.04);filter:none}
+.tile span{position:absolute;left:14px;bottom:12px;z-index:1;text-shadow:0 1px 6px #000;color:#EDEBE6}
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.member{border:1px solid rgba(255,255,255,.08);background:#101010}
+.member .ph{aspect-ratio:3/4;background:#141414;overflow:hidden}
+.member img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.3)}
+.member h3{margin:0;padding:16px 18px;font-size:15px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;gap:8px}
+.member h3 small{color:#C8A97E;font-size:10px;letter-spacing:.2em}
+.member.plain{padding:22px 18px}
+.member.plain h3{padding:0}
 .mapbox{height:280px;border:1px solid rgba(255,255,255,.08);background:#141414}
 .mapbox iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(.92) contrast(.9)}
 /* modal */
@@ -100,7 +118,7 @@ button,input,select{font-family:inherit}
         <span class="cap" data-bind="tagline" style="font-size:9px;color:#9A9891">VINOHRADY • PRAHA</span>
       </a>
       <nav class="nav" aria-label="Hlavní navigace">
-        <a href="#services">Služby</a><a href="#about">O nás</a><a href="#gallery">Galerie</a><a href="#kontakt">Kontakt</a>
+        <a href="#services">Služby</a><a href="#about">O nás</a><a href="#gallery">Galerie</a><a href="#team">Tým</a><a href="#kontakt">Kontakt</a>
       </nav>
       <div style="display:flex;justify-content:flex-end;align-items:center;gap:28px">
         <a class="tel" data-bind="telLink" data-bind-text="phoneDisp" href="tel:+420774123456" style="font-size:13px;letter-spacing:.06em;color:#EDEBE6">+420 774 123 456</a>
@@ -109,7 +127,9 @@ button,input,select{font-family:inherit}
     </div>
   </header>
 
-  <section class="wrap hero" style="display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:72px;padding-top:112px;padding-bottom:112px;align-items:end">
+  <div class="herowrap">
+  <img class="herobg" id="hero-bg" alt="" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=FB">
+  <section class="wrap hero" style="position:relative;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:72px;padding-top:112px;padding-bottom:112px;align-items:end">
     <div>
       <p class="cap" data-bind="heroCap" style="margin:0 0 36px">PÁNSKÉ HOLIČSTVÍ • PRAHA 2</p>
       <h1 class="disp" style="font-size:112px">Precizní střih.<br>Tradiční řemeslo.</h1>
@@ -120,6 +140,7 @@ button,input,select{font-family:inherit}
       </div>
     </div>
     <aside class="panel">
+      <div class="photo"><img id="hero-img" alt="Interiér salonu" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=FB"></div>
       <p class="cap" style="margin:0">Kontakt</p>
       <h2 class="disp" data-bind="name" style="font-size:30px;margin:14px 0 28px">BARBER &amp; CO.</h2>
       <div style="display:grid;border-top:1px solid rgba(255,255,255,.08)">
@@ -133,6 +154,7 @@ button,input,select{font-family:inherit}
       </div>
     </aside>
   </section>
+  </div>
 
   <section id="services" class="wrap" style="padding-top:40px;padding-bottom:120px">
     <p class="cap" style="margin:0 0 16px">Služby</p>
@@ -179,16 +201,13 @@ button,input,select{font-family:inherit}
       <h2 class="disp sec-h" style="font-size:56px">Galerie</h2>
       <p class="muted" style="margin:0;max-width:360px;font-size:14px">Střihy, detaily interiéru a práce našich mistrů.</p>
     </div>
-    <div class="bento">
-      <div class="tile t1" role="img" aria-label="Fade, detail">[FADE · detail]</div>
-      <div class="tile t2" role="img" aria-label="Úprava vousů">[VOUSY · kontura]</div>
-      <div class="tile" role="img" aria-label="Nástroje">[NÁSTROJE]</div>
-      <div class="tile" role="img" aria-label="Interiér">[INTERIÉR]</div>
-      <div class="tile" role="img" aria-label="Holení břitvou">[HOLENÍ]</div>
-      <div class="tile" role="img" aria-label="Mistr při práci">[MISTR]</div>
-      <div class="tile" role="img" aria-label="Kožené křeslo">[KŘESLO]</div>
-      <div class="tile" role="img" aria-label="Detail střihu">[STŘIH · detail]</div>
-    </div>
+    <div class="bento" id="bento"></div>
+  </section>
+
+  <section id="team" class="wrap" style="padding-bottom:120px">
+    <p class="cap" style="margin:0 0 16px">Náš tým</p>
+    <h2 class="disp sec-h" style="font-size:56px;margin-bottom:48px">Mistři</h2>
+    <div class="team" id="team-list"></div>
   </section>
 
   <section id="kontakt" class="wrap two" style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding-bottom:120px;border-top:1px solid rgba(255,255,255,.08);padding-top:96px">
@@ -237,11 +256,7 @@ button,input,select{font-family:inherit}
         <div class="field" style="grid-column:1/-1"><label class="lbl" for="f-service">Služba</label>
           <select id="f-service" class="inp"></select></div>
         <div class="field" style="grid-column:1/-1"><label class="lbl" for="f-barber">Mistr</label>
-          <select id="f-barber" class="inp">
-            <option>Kterýkoliv volný barber</option>
-            <option>Senior barber</option>
-            <option>Barber</option>
-          </select></div>
+          <select id="f-barber" class="inp"></select></div>
         <div class="field"><label class="lbl" for="f-date">Datum</label><input id="f-date" class="inp" type="date" required></div>
         <div class="field"><label class="lbl" for="f-time">Čas</label><select id="f-time" class="inp" required></select></div>
         <div class="field"><label class="lbl" for="f-name">Jméno</label><input id="f-name" class="inp" type="text" autocomplete="name" required></div>
@@ -257,32 +272,201 @@ button,input,select{font-family:inherit}
 </div>
 
 <script>
+/* Záložní fotka (inline SVG – nikdy se nerozbije): tmavý vintage barbershop, pruhovaný barber pole + křeslo */
+var FB = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+ '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">'+
+ '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1815"/><stop offset="1" stop-color="#0b0a09"/></linearGradient>'+
+ '<pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="20" height="40" fill="#C8A97E"/><rect x="20" width="20" height="40" fill="#EDEBE6"/></pattern></defs>'+
+ '<rect width="800" height="600" fill="url(#g)"/>'+
+ '<g opacity=".16" stroke="#C8A97E" fill="none"><rect x="60" y="60" width="680" height="480"/><rect x="76" y="76" width="648" height="448"/></g>'+
+ '<rect x="360" y="110" width="80" height="250" rx="40" fill="url(#p)" opacity=".85"/><rect x="350" y="96" width="100" height="22" rx="6" fill="#C8A97E"/><rect x="350" y="352" width="100" height="22" rx="6" fill="#C8A97E"/>'+
+ '<g fill="#2a2520" stroke="#C8A97E" stroke-opacity=".5"><rect x="300" y="430" width="200" height="40" rx="10"/><rect x="330" y="400" width="140" height="40" rx="14"/><rect x="390" y="470" width="20" height="50"/><rect x="340" y="516" width="120" height="12" rx="6"/></g>'+
+ '<text x="400" y="566" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" letter-spacing="6" fill="#C8A97E" opacity=".7">BARBERSHOP · PRAHA</text></svg>');
+
 /* ============ DATABASE: 20 reálných pražských barbershopů ============
    phone = mobilní číslo (bez +420), ověřeno na webu salonu / v rezervačním systému. */
 var BARBERS = {
-  'gbc-miru':   {name:"Gentlemen's Barber Club",   area:'Vinohrady',  praha:2,  street:'Náměstí Míru 1356/8',      zip:'120 00', city:'Praha 2',  phone:'775999995'},
-  'mybarber':   {name:'My Barber',                 area:'Vinohrady',  praha:10, street:'Francouzská 765/50',       zip:'101 00', city:'Praha 10', phone:'734466055'},
-  'rebell':     {name:'Rebell Barbers Karlín',     area:'Karlín',     praha:8,  street:'Sokolovská 47/73',         zip:'186 00', city:'Praha 8',  phone:'608659999'},
-  'authentic':  {name:'Authentic Barber Shop',     area:'Karlín',     praha:8,  street:'Křižíkova 28',             zip:'186 00', city:'Praha 8',  phone:'774393918'},
-  'dapera':     {name:'Dapera Barber',             area:'Holešovice', praha:7,  street:'Plynární 31',              zip:'170 00', city:'Praha 7',  phone:'777511169'},
-  'kingofkings':{name:'King of Kings Barbershop',  area:'Holešovice', praha:7,  street:'Poupětova 1331/12',        zip:'170 00', city:'Praha 7',  phone:'737567743'},
-  'gbc-seifertova':{name:"Gentlemen's Barber Club Žižkov",area:'Žižkov',praha:3, street:'Seifertova 995/29',        zip:'130 00', city:'Praha 3',  phone:'776798798'},
-  'sharks':     {name:"Shark's Barber Žižkov",     area:'Žižkov',     praha:3,  street:'Hartigova 1626/177',       zip:'130 00', city:'Praha 3',  phone:'776181637'},
-  'deluxe':     {name:'Barbershop De Luxe',        area:'Smíchov',    praha:5,  street:'Zborovská 12',             zip:'150 00', city:'Praha 5',  phone:'775202072'},
-  'american':   {name:'American Barber in Prague', area:'Smíchov',    praha:5,  street:'Na Bělidle 813/12',        zip:'150 00', city:'Praha 5',  phone:'608496648'},
-  'gbc-lidicka':{name:"Gentlemen's Barber Club Smíchov",area:'Smíchov',praha:5, street:'Lidická 400/39',           zip:'150 00', city:'Praha 5',  phone:'774466664'},
-  'crown':      {name:'The Crown Barbershop Dejvice',area:'Dejvice',  praha:6,  street:'Muchova 237/15',           zip:'160 00', city:'Praha 6',  phone:'606853015'},
-  'marcus':     {name:'Marcus Barbershop',         area:'Dejvice',    praha:6,  street:'Národní obrany 715/16',    zip:'160 00', city:'Praha 6',  phone:'777649127'},
-  'canadian':   {name:'The Canadian Barbershop',   area:'Vršovice',   praha:10, street:'Francouzská 400/112',      zip:'101 00', city:'Praha 10', phone:'723384249'},
-  'flash':      {name:'Flash Barbershop',          area:'Vršovice',   praha:10, street:'Žitomírská 599/38',        zip:'101 00', city:'Praha 10', phone:'723002575'},
-  'thebarber':  {name:'The Barber from Old Town',  area:'Praha 1 – Staré Město',praha:1,street:'Jilská 452/22',    zip:'110 00', city:'Praha 1',  phone:'774352600'},
-  'classic':    {name:'Classic Barber Shop',       area:'Praha 1 – Nové Město',praha:1,street:'Vodičkova 677/10',   zip:'110 00', city:'Praha 1',  phone:'774364454'},
-  'thomas':     {name:"Thomas's Barber Shop",      area:'Praha 1 – Nové Město',praha:1,street:'Panská 4 (Černá růže)',zip:'110 00',city:'Praha 1', phone:'732628948'},
-  'angels':     {name:'Angels Barbershop',         area:'Praha 1 – Václavské nám.',praha:1,street:'Václavské nám. 36',zip:'110 00',city:'Praha 1', phone:'731343088'},
-  'goodtimes':  {name:'Good Times Barber Shop & Tattoo',area:'Praha 1 – Nové Město',praha:1,street:'Soukenická 22',zip:'110 00',city:'Praha 1', phone:'739463372'}
+  'gbc-miru':   {name:"Gentlemen's Barber Club",   area:'Vinohrady',  praha:2,  street:'Náměstí Míru 1356/8',      zip:'120 00', city:'Praha 2',  phone:'775999995',
+    heroImage:"https://www.gentlemensbarberclub.cz/data/6.jpg",
+    gallery:[
+      "https://www.gentlemensbarberclub.cz/data/5.jpg",
+      "https://www.gentlemensbarberclub.cz/data/6.jpg",
+      "https://www.gentlemensbarberclub.cz/data/7.jpg",
+      "https://www.gentlemensbarberclub.cz/data/13.jpg"
+],
+    team:[{"n": "František", "img": null}, {"n": "Natálie", "img": null}, {"n": "Dima", "img": null}, {"n": "Drako", "img": null}, {"n": "Kryštof", "img": null}, {"n": "Kristýna", "img": null}, {"n": "Samuel", "img": null}, {"n": "Michal", "img": null}]
+  },
+  'mybarber':   {name:'My Barber',                 area:'Vinohrady',  praha:10, street:'Francouzská 765/50',       zip:'101 00', city:'Praha 10', phone:'734466055',
+    heroImage:"https://mybarber.cz/wp-content/uploads/2023/03/337196501_736665844651589_6277218674099976999_n-683x1024.jpg",
+    gallery:[
+      "https://mybarber.cz/wp-content/uploads/2023/03/337196501_736665844651589_6277218674099976999_n-683x1024.jpg",
+      "https://mybarber.cz/wp-content/uploads/2023/04/337000744_907824350469715_7101777606349876098_n.jpg",
+      "https://mybarber.cz/wp-content/uploads/2026/03/witek-768x1024.jpg"
+],
+    team:[{"n": "Witek", "img": null}]
+  },
+  'rebell':     {name:'Rebell Barbers Karlín',     area:'Karlín',     praha:8,  street:'Sokolovská 47/73',         zip:'186 00', city:'Praha 8',  phone:'608659999',
+    heroImage:"https://www.rebellbarbers.cz/wp-content/uploads/2026/06/e-2.jpg",
+    gallery:[
+      "https://www.rebellbarbers.cz/wp-content/uploads/2026/06/home.jpg",
+      "https://www.rebellbarbers.cz/wp-content/uploads/2026/06/e-2.jpg"
+],
+    team:[]
+  },
+  'authentic':  {name:'Authentic Barber Shop',     area:'Karlín',     praha:8,  street:'Křižíkova 28',             zip:'186 00', city:'Praha 8',  phone:'774393918',
+    heroImage:null,
+    gallery:[],
+    team:[]
+  },
+  'dapera':     {name:'Dapera Barber',             area:'Holešovice', praha:7,  street:'Plynární 31',              zip:'170 00', city:'Praha 7',  phone:'777511169',
+    heroImage:null,
+    gallery:[],
+    team:[]
+  },
+  'kingofkings':{name:'King of Kings Barbershop',  area:'Holešovice', praha:7,  street:'Poupětova 1331/12',        zip:'170 00', city:'Praha 7',  phone:'737567743',
+    heroImage:"https://storage.googleapis.com/msgsndr/HBIajJXU1PD2a8M4a3u0/media/699330961d5e049d605194ec.jpeg",
+    gallery:[
+      "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/69971262df9bdf208dffd82b.png",
+      "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/699712622a2f158e07ed7c18.png",
+      "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/6997126220c0354a82fb216f.png",
+      "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/9a84c2ab-4c35-4065-aa81-0c948ca47e93.webp"
+],
+    team:[{"n": "Jay Adams", "img": "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/f7411ef3-36e1-4e2c-9663-48113c855df9.webp"}, {"n": "Kyle Metcalfe", "img": "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/d1938f78-74af-4039-96e6-38613bf954cf.webp"}, {"n": "Matěj Černohorský", "img": "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/9a84c2ab-4c35-4065-aa81-0c948ca47e93.webp"}, {"n": "Sam Vernaza", "img": "https://assets.cdn.filesafe.space/wWEjMwJeKEyQA5MsoKFd/media/4622ec7d-c032-4fe1-ab59-106e1e782e3b.webp"}]
+  },
+  'gbc-seifertova':{name:"Gentlemen's Barber Club Žižkov",area:'Žižkov',praha:3, street:'Seifertova 995/29',        zip:'130 00', city:'Praha 3',  phone:'776798798',
+    heroImage:"https://www.gentlemensbarberclub.cz/data/6.jpg",
+    gallery:[
+      "https://www.gentlemensbarberclub.cz/data/5.jpg",
+      "https://www.gentlemensbarberclub.cz/data/6.jpg",
+      "https://www.gentlemensbarberclub.cz/data/7.jpg",
+      "https://www.gentlemensbarberclub.cz/data/13.jpg"
+],
+    team:[{"n": "František", "img": null}, {"n": "Natálie", "img": null}, {"n": "Dima", "img": null}, {"n": "Drako", "img": null}, {"n": "Kryštof", "img": null}, {"n": "Kristýna", "img": null}, {"n": "Samuel", "img": null}, {"n": "Michal", "img": null}]
+  },
+  'sharks':     {name:"Shark's Barber Žižkov",     area:'Žižkov',     praha:3,  street:'Hartigova 1626/177',       zip:'130 00', city:'Praha 3',  phone:'776181637',
+    heroImage:"https://sharksbarber.cz/_ipx/w_728/img/pobocka-zizkov.jpg",
+    gallery:[
+      "https://www.sharksbarber.cz/og-image.jpg",
+      "https://sharksbarber.cz/img/services-bg.jpg"
+],
+    team:[{"n": "Vojta", "img": null}, {"n": "Vierka", "img": null}]
+  },
+  'deluxe':     {name:'Barbershop De Luxe',        area:'Smíchov',    praha:5,  street:'Zborovská 12',             zip:'150 00', city:'Praha 5',  phone:'775202072',
+    heroImage:"https://barberdeluxe.cz/wp-content/uploads/2026/08/bc2281b5d76890cac64ec3b8ec0cf9a3bdd8e9d4.png",
+    gallery:[
+      "https://barberdeluxe.cz/wp-content/uploads/2026/08/4456f311147b984e942cec1886676a8c6284e5d6.jpg",
+      "https://barberdeluxe.cz/wp-content/uploads/2026/08/4429bdcfcd4053ea1461833e97883c779f8faac1.jpg",
+      "https://barberdeluxe.cz/wp-content/uploads/2026/08/8592887bfd35ccf398a8b1d7911027770f795bb9.jpg",
+      "https://barberdeluxe.cz/wp-content/uploads/2026/08/32038fd20463cf2bfaea57994be52ba2a17c0261.jpg",
+      "https://barberdeluxe.cz/wp-content/uploads/2026/08/9a55fab599bf3affa0467a4b96c5bcb9744cde3e.jpg",
+      "https://barberdeluxe.cz/wp-content/uploads/2026/08/Frame-51.jpg"
+],
+    team:[{"n": "Pedro (master barber)", "img": null}, {"n": "Pedro jr.", "img": null}, {"n": "Azevedo", "img": null}]
+  },
+  'american':   {name:'American Barber in Prague', area:'Smíchov',    praha:5,  street:'Na Bělidle 813/12',        zip:'150 00', city:'Praha 5',  phone:'608496648',
+    heroImage:"https://static.wixstatic.com/media/963430_2c929c5c935d4b7799065e2404ad5e17~mv2.jpg/v1/fill/w_1600,h_1100,al_c,q_80/a.jpg",
+    gallery:[
+      "https://static.wixstatic.com/media/963430_9ea14dd6bba948afa261f3518483d997~mv2.jpg/v1/fill/w_800,h_800,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/963430_4698113a4cab4cec9c82aff78b830a79~mv2.jpg/v1/fill/w_800,h_800,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/963430_5c0e90e3ef9a4994bd1744d54227ff82~mv2.jpg/v1/fill/w_800,h_800,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/963430_3d034eea14ae4199a1b27412838ee882~mv2.jpg/v1/fill/w_800,h_800,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/963430_bc334294d6434741ba7b02722d7aecd3~mv2.jpg/v1/fill/w_800,h_800,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/963430_a286ee54955348c595eb5e426ffd11c8~mv2.jpg/v1/fill/w_800,h_800,al_c,q_80/a.jpg"
+],
+    team:[{"n": "Kraig", "img": null}]
+  },
+  'gbc-lidicka':{name:"Gentlemen's Barber Club Smíchov",area:'Smíchov',praha:5, street:'Lidická 400/39',           zip:'150 00', city:'Praha 5',  phone:'774466664',
+    heroImage:"https://www.gentlemensbarberclub.cz/data/6.jpg",
+    gallery:[
+      "https://www.gentlemensbarberclub.cz/data/5.jpg",
+      "https://www.gentlemensbarberclub.cz/data/6.jpg",
+      "https://www.gentlemensbarberclub.cz/data/7.jpg",
+      "https://www.gentlemensbarberclub.cz/data/13.jpg"
+],
+    team:[{"n": "František", "img": null}, {"n": "Natálie", "img": null}, {"n": "Dima", "img": null}, {"n": "Drako", "img": null}, {"n": "Kryštof", "img": null}, {"n": "Kristýna", "img": null}, {"n": "Samuel", "img": null}, {"n": "Michal", "img": null}]
+  },
+  'crown':      {name:'The Crown Barbershop Dejvice',area:'Dejvice',  praha:6,  street:'Muchova 237/15',           zip:'160 00', city:'Praha 6',  phone:'606853015',
+    heroImage:"https://thecrownbarbershop.cz/wp-content/uploads/2023/12/hero-1.jpeg",
+    gallery:[
+      "https://thecrownbarbershop.cz/wp-content/uploads/2023/12/image02167.jpeg",
+      "https://thecrownbarbershop.cz/wp-content/uploads/2023/12/image02597-e1707151737980.jpeg",
+      "https://thecrownbarbershop.cz/wp-content/uploads/2023/12/image02595-scaled.jpeg",
+      "https://thecrownbarbershop.cz/wp-content/uploads/2023/12/image02594-scaled.jpeg",
+      "https://thecrownbarbershop.cz/wp-content/uploads/2023/12/image02163.jpeg",
+      "https://thecrownbarbershop.cz/wp-content/uploads/2023/12/image02161.jpeg"
+],
+    team:[{"n": "Honza", "img": "https://thecrownbarbershop.cz/wp-content/uploads/2025/05/honza_foto.jpeg"}, {"n": "Bára", "img": "https://thecrownbarbershop.cz/wp-content/uploads/2024/01/bara_barber.jpg"}]
+  },
+  'marcus':     {name:'Marcus Barbershop',         area:'Dejvice',    praha:6,  street:'Národní obrany 715/16',    zip:'160 00', city:'Praha 6',  phone:'777649127',
+    heroImage:"https://www.marcusbarbershop.cz/wp-content/uploads/2025/06/heroimage2.jpg",
+    gallery:[
+      "https://www.marcusbarbershop.cz/wp-content/uploads/2025/11/Screenshot-2025-11-19-at-12.32.44-1.png",
+      "https://i0.wp.com/www.marcusbarbershop.cz/wp-content/uploads/2025/04/DSC09444-1.jpg?resize=1080%2C1620&ssl=1",
+      "https://i0.wp.com/www.marcusbarbershop.cz/wp-content/uploads/2025/04/DSC09450.jpg?resize=1080%2C1620&ssl=1",
+      "https://i0.wp.com/www.marcusbarbershop.cz/wp-content/uploads/2025/06/DSC093992.jpg",
+      "https://i0.wp.com/www.marcusbarbershop.cz/wp-content/uploads/2025/04/DSC09372.jpg?resize=1080%2C1620&ssl=1",
+      "https://i0.wp.com/www.marcusbarbershop.cz/wp-content/uploads/2025/04/DSC09377.jpg?resize=1080%2C1620&ssl=1"
+],
+    team:[{"n": "Eva", "img": null}, {"n": "Lukáš", "img": null}, {"n": "Tomáš", "img": null}, {"n": "Daniel", "img": null}]
+  },
+  'canadian':   {name:'The Canadian Barbershop',   area:'Vršovice',   praha:10, street:'Francouzská 400/112',      zip:'101 00', city:'Praha 10', phone:'723384249',
+    heroImage:"https://static.wixstatic.com/media/b1db23_960fa374570c47649161e69c7fd97f64~mv2.jpg/v1/fill/w_1600,h_1100,al_c,q_80/a.jpg",
+    gallery:[
+      "https://static.wixstatic.com/media/b1db23_9f20ff0f1d4341d3839d97b18bb8484f~mv2.jpg/v1/fill/w_900,h_900,al_c,q_80/a.jpg"
+],
+    team:[{"n": "Eric", "img": null}, {"n": "Travis", "img": null}, {"n": "Russel", "img": null}, {"n": "Daniel", "img": null}]
+  },
+  'flash':      {name:'Flash Barbershop',          area:'Vršovice',   praha:10, street:'Žitomírská 599/38',        zip:'101 00', city:'Praha 10', phone:'723002575',
+    heroImage:"https://flashbarbershop.com/_astro/barbershop-interior-6.CqKVS92d_yd2oh.webp",
+    gallery:[
+      "https://flashbarbershop.com/_astro/haircut-fade-3.C3-un42g_Z2uP3rX.webp",
+      "https://flashbarbershop.com/_astro/haircut-modern-2.4fjPuBD4_Z26mkec.webp",
+      "https://flashbarbershop.com/_astro/haircut-premium-7.CoOHUPg5_LQMFF.webp",
+      "https://flashbarbershop.com/_astro/beard-trim-4.feRlcGYh_14YLYl.webp",
+      "https://flashbarbershop.com/_astro/haircut-scissors-9.Ba4Y-aVq_BpO1j.webp",
+      "https://flashbarbershop.com/_astro/beard-styling-8.DsOS4ExM_ZcNaMn.webp"
+],
+    team:[{"n": "Ivan", "img": null}, {"n": "Nazar", "img": null}]
+  },
+  'thebarber':  {name:'The Barber from Old Town',  area:'Praha 1 – Staré Město',praha:1,street:'Jilská 452/22',    zip:'110 00', city:'Praha 1',  phone:'774352600',
+    heroImage:"http://static1.squarespace.com/static/5c9d58cffd67934b52574476/t/5d7cc45648ca686605d7bd4b/1568457822112/b_bck.jpg?format=1200w",
+    gallery:[
+      "https://images.squarespace-cdn.com/content/v1/5c9d58cffd67934b52574476/1752414948136-Q8DHLSENRCTEDP3KN1HE/_DSC6401+8x10+crop.jpg?format=1200w",
+      "https://images.squarespace-cdn.com/content/v1/5c9d58cffd67934b52574476/1752414931289-GFF8IKHZLM10XA3SJSAZ/_DSC6395+8x10.jpg?format=1200w",
+      "https://images.squarespace-cdn.com/content/v1/5c9d58cffd67934b52574476/1631060600667-79R3EP8CZ3LPNKXTHRDD/_6042988.JPG?format=1200w",
+      "https://images.squarespace-cdn.com/content/v1/5c9d58cffd67934b52574476/6aa174e5-94e6-48c6-be26-96a42c9ba1b7/_DSC6185.jpg?format=1200w"
+],
+    team:[]
+  },
+  'classic':    {name:'Classic Barber Shop',       area:'Praha 1 – Nové Město',praha:1,street:'Vodičkova 677/10',   zip:'110 00', city:'Praha 1',  phone:'774364454',
+    heroImage:null,
+    gallery:[],
+    team:[]
+  },
+  'thomas':     {name:"Thomas's Barber Shop",      area:'Praha 1 – Nové Město',praha:1,street:'Panská 4 (Černá růže)',zip:'110 00',city:'Praha 1', phone:'732628948',
+    heroImage:"https://static.wixstatic.com/media/8a4617_89b68cebb6f541e8b6ac41821cab538e~mv2.jpg/v1/fill/w_900,h_900,al_c,q_80/a.jpg",
+    gallery:[
+      "https://static.wixstatic.com/media/8a4617_89b68cebb6f541e8b6ac41821cab538e~mv2.jpg/v1/fill/w_900,h_900,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/8a4617_b63a5e937e95477a87ab5538f7f817d8~mv2.jpg/v1/fill/w_900,h_900,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/8a4617_5ffff0369fc542cc8900748cb832ac07~mv2.jpg/v1/fill/w_900,h_900,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/8a4617_1f0da7fb111746cc835eb5fab15e594c~mv2.jpg/v1/fill/w_900,h_900,al_c,q_80/a.jpg",
+      "https://static.wixstatic.com/media/8a4617_c8de0f461b6d4d9e8e872a154f657994~mv2.jpg/v1/fill/w_900,h_900,al_c,q_80/a.jpg"
+],
+    team:[]
+  },
+  'angels':     {name:'Angels Barbershop',         area:'Praha 1 – Václavské nám.',praha:1,street:'Václavské nám. 36',zip:'110 00',city:'Praha 1', phone:'731343088',
+    heroImage:null,
+    gallery:[],
+    team:[]
+  },
+  'goodtimes':  {name:'Good Times Barber Shop & Tattoo',area:'Praha 1 – Nové Město',praha:1,street:'Soukenická 22',zip:'110 00',city:'Praha 1', phone:'739463372',
+    heroImage:"https://gtbarber-tattoo.cz/cz/wp-content/uploads/2019/08/gt-bg-new.jpg",
+    gallery:[],
+    team:[{"n": "Jirka", "img": null}, {"n": "James", "img": null}, {"n": "Rico", "img": null}]
+  }
 };
 /* výchozí salon (pokud chybí / neplatí ?f=) – telefon je zástupný z návrhu */
-var DEFAULT = {name:'BARBER & CO.', area:'Vinohrady', praha:2, street:'Mánesova', zip:'120 00', city:'Praha 2', phone:'774123456'};
+var DEFAULT = {name:'BARBER & CO.', area:'Vinohrady', praha:2, street:'Mánesova', zip:'120 00', city:'Praha 2', phone:'774123456', heroImage:null, gallery:[], team:[]};
 
 var SERVICES = [
   {id:'classic', group:'hair',  name:'Klasický střih vlasů',            desc:'Mytí, střih, styling, kolínská',        duration:45, price:750},
@@ -331,6 +515,29 @@ var SERVICES = [
   document.title = (isDefault?'BARBER & CO.':b.name)+' — Pánské holičství '+(b.area.indexOf('Praha 1')===0?'Praha 1':b.area+', Praha');
   var md = document.querySelector('meta[name=description]');
   if (md) md.content = b.name+' – pánské holičství, '+addrFull+'. Rezervace přes WhatsApp.';
+
+  /* ---- média salonu: hero, galerie, tým (s ochranou proti rozbitým obrázkům) ---- */
+  var esc = function(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); };
+  var IMG_ERR = 'onerror="this.onerror=null;this.src=FB"';
+  var heroSrc = b.heroImage || FB;
+  $('#hero-img').src = heroSrc; $('#hero-bg').src = heroSrc;
+  var gal = (b.gallery||[]).slice(0,8);
+  while (gal.length < 4) gal.push(null);          // chybějící místo = záložní fotka
+  var tileCls = ['tile t1','tile t2','tile','tile'];
+  $('#bento').innerHTML = gal.map(function(src,i){
+    var n = ('0'+(i+1)).slice(-2);
+    return '<div class="'+(tileCls[i]||'tile')+'"><img src="'+esc(src||FB)+'" alt="'+esc(b.name)+' – lookbook '+n+'" loading="lazy" referrerpolicy="no-referrer" '+IMG_ERR+'><span>'+(src?'LOOKBOOK · '+n:'')+'</span></div>';
+  }).join('');
+  var team = b.team||[];
+  if (team.length){
+    $('#team-list').innerHTML = team.map(function(m){
+      return m.img
+        ? '<div class="member"><div class="ph"><img src="'+esc(m.img)+'" alt="'+esc(m.n)+'" loading="lazy" referrerpolicy="no-referrer" '+IMG_ERR+'></div><h3>'+esc(m.n)+'<small>BARBER</small></h3></div>'
+        : '<div class="member plain"><h3>'+esc(m.n)+'<small>BARBER</small></h3></div>';
+    }).join('');
+  } else { $('#team').style.display='none'; $$('a[href="#team"]').forEach(function(a){a.style.display='none'}); }
+  var fb = $('#f-barber');
+  fb.innerHTML = '<option>Kterýkoliv volný barber</option>'+team.map(function(m){return '<option>'+esc(m.n)+'</option>'}).join('');
 
   /* ---- ceník ---- */
   var picked = 'fade';
