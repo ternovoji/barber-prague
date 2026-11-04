@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BARBER &amp; CO. — Pánské holičství Praha</title>
+<meta name="description" content="Pánské holičství v Praze: precizní střih, fade, úprava vousů a tradiční holení. Rezervace přes WhatsApp.">
+<meta name="theme-color" content="#0C0C0C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{margin:0;background:#0C0C0C;color:#EDEBE6;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{color:inherit;text-decoration:none}
+button,input,select{font-family:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 56px}
+.cap{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#C8A97E;font-weight:500}
+.disp{font-weight:500;text-transform:uppercase;letter-spacing:-.01em;line-height:.98;margin:0}
+.muted{color:#9A9891}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 28px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;border:1px solid #C8A97E;cursor:pointer;background:transparent;color:#EDEBE6;transition:background .2s,color .2s}
+.btn:hover{background:rgba(200,169,126,.12)}
+.btn-solid{background:#C8A97E;color:#0C0C0C}
+.btn-solid:hover{background:#d8bb92}
+.nav{display:flex;gap:40px}
+.nav a{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#9A9891}
+.nav a:hover{color:#EDEBE6}
+.row{display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.08);align-items:center}
+.row h3{margin:0;font-size:18px;font-weight:500}
+.row p{margin:4px 0 0;color:#9A9891;font-size:14px}
+.rprice{display:flex;align-items:center;gap:20px}
+.price{font-size:17px;color:#C8A97E;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rv{height:36px;padding:0 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(255,255,255,.25);background:transparent;color:#EDEBE6;cursor:pointer;transition:all .2s}
+.rv:hover,.rv.on{background:#C8A97E;color:#0C0C0C;border-color:#C8A97E}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:12px}
+.tile{overflow:hidden;background:#141414;border:1px solid rgba(255,255,255,.08);display:flex;align-items:flex-end;padding:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#9A9891;background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.02) 0 2px,transparent 2px 14px)}
+.tile:hover{border-color:rgba(200,169,126,.5)}
+.t1{grid-column:span 2;grid-row:span 2}
+.t2{grid-column:span 2}
+.col3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.col3>div{padding:44px 36px}
+.col3>div+div{border-left:1px solid rgba(255,255,255,.08)}
+.field{display:grid;gap:6px}
+.lbl{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9A9891}
+.inp{width:100%;height:50px;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.2);color:#EDEBE6;font-size:15px;padding:0;border-radius:0;outline:none;color-scheme:dark}
+.inp:focus{border-bottom-color:#C8A97E}
+.inp option{background:#0C0C0C;color:#EDEBE6}
+.inp.err{border-bottom-color:#c0553f}
+.foot{padding:40px 56px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9A9891}
+.line{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:15px}
+.panel{border:1px solid rgba(255,255,255,.08);padding:36px;background:#101010}
+.mapbox{height:280px;border:1px solid rgba(255,255,255,.08);background:#141414}
+.mapbox iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(.92) contrast(.9)}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+.ov.open{display:flex}
+.modal{width:100%;max-width:560px;max-height:calc(100vh - 32px);overflow:auto;background:#0C0C0C;border:1px solid rgba(200,169,126,.4);padding:40px}
+.mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:28px}
+.x{background:none;border:0;color:#9A9891;font-size:28px;line-height:1;cursor:pointer;padding:0}
+.x:hover{color:#EDEBE6}
+.sum{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:28px;align-items:baseline}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px 24px}
+.wa{background:#25D366;border-color:#25D366;color:#0C0C0C}
+.wa:hover{background:#3be07a}
+.hint{font-size:12px;color:#9A9891;margin:14px 0 0}
+@media (max-width:900px){
+  .wrap{padding:0 20px}
+  .hdr{grid-template-columns:1fr auto!important;height:72px!important;gap:12px!important}
+  .nav{display:none}
+  .hdr .tel{display:none}
+  .hero{grid-template-columns:1fr!important;gap:40px!important;padding-top:56px!important;padding-bottom:64px!important}
+  .hero h1{font-size:clamp(40px,12vw,72px)!important}
+  .hero p.lead{font-size:17px!important}
+  .two{grid-template-columns:1fr!important;gap:48px!important}
+  .sec-h{font-size:40px!important}
+  .col3{grid-template-columns:1fr}
+  .col3>div+div{border-left:0;border-top:1px solid rgba(255,255,255,.08)}
+  .col3>div{padding:32px 20px}
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px}
+  .t1{grid-row:span 2}.t2{grid-column:span 2}
+  .row{grid-template-columns:1fr}
+  .rprice{justify-content:space-between}
+  .foot{padding:32px 20px;flex-direction:column}
+  .picked{flex-direction:column;align-items:flex-start!important;gap:20px}
+  .modal{padding:28px 20px}
+  .grid2{grid-template-columns:1fr}
+  .ctas{flex-direction:column}
+  .ctas .btn{width:100%}
+}
+</style>
+</head>
+<body>
+<div id="top" style="background:#0C0C0C;color:#EDEBE6;min-height:100%">
+
+  <header style="position:sticky;top:0;z-index:10;background:rgba(12,12,12,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">
+    <div class="wrap hdr" style="height:88px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:32px">
+      <a href="#top" style="display:flex;flex-direction:column;gap:4px">
+        <span data-bind="name" style="font-size:16px;font-weight:600;letter-spacing:.14em;text-transform:uppercase">BARBER &amp; CO.</span>
+        <span class="cap" data-bind="tagline" style="font-size:9px;color:#9A9891">VINOHRADY • PRAHA</span>
+      </a>
+      <nav class="nav" aria-label="Hlavní navigace">
+        <a href="#services">Služby</a><a href="#about">O nás</a><a href="#gallery">Galerie</a><a href="#kontakt">Kontakt</a>
+      </nav>
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:28px">
+        <a class="tel" data-bind="telLink" data-bind-text="phoneDisp" href="tel:+420774123456" style="font-size:13px;letter-spacing:.06em;color:#EDEBE6">+420 774 123 456</a>
+        <button class="btn" data-open style="height:44px;padding:0 20px;font-size:10px">Online rezervace</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="wrap hero" style="display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:72px;padding-top:112px;padding-bottom:112px;align-items:end">
+    <div>
+      <p class="cap" data-bind="heroCap" style="margin:0 0 36px">PÁNSKÉ HOLIČSTVÍ • PRAHA 2</p>
+      <h1 class="disp" style="font-size:112px">Precizní střih.<br>Tradiční řemeslo.</h1>
+      <p class="muted lead" data-bind="lead" style="font-size:20px;max-width:560px;margin:40px 0 48px;font-weight:300"></p>
+      <div class="ctas" style="display:flex;gap:16px">
+        <button class="btn btn-solid" data-open>Zarezervovat termín</button>
+        <a href="#services" class="btn">Ceník služeb</a>
+      </div>
+    </div>
+    <aside class="panel">
+      <p class="cap" style="margin:0">Kontakt</p>
+      <h2 class="disp" data-bind="name" style="font-size:30px;margin:14px 0 28px">BARBER &amp; CO.</h2>
+      <div style="display:grid;border-top:1px solid rgba(255,255,255,.08)">
+        <div class="line"><span class="muted">Adresa</span><span data-bind="addrShort" style="text-align:right"></span></div>
+        <div class="line"><span class="muted">Čtvrť</span><span data-bind="area" style="text-align:right"></span></div>
+        <div class="line"><span class="muted">Telefon</span><a data-bind="telLink" data-bind-text="phoneDisp" href="#" style="text-align:right"></a></div>
+      </div>
+      <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+        <a class="btn wa" data-bind="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" data-bind="mapLink" href="#" target="_blank" rel="noopener">Navigovat</a>
+      </div>
+    </aside>
+  </section>
+
+  <section id="services" class="wrap" style="padding-top:40px;padding-bottom:120px">
+    <p class="cap" style="margin:0 0 16px">Služby</p>
+    <h2 class="disp sec-h" style="font-size:56px;margin-bottom:64px">Ceník</h2>
+    <div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:96px">
+      <div>
+        <p class="cap" style="margin:0 0 12px;color:#EDEBE6">STŘIHY &amp; PÉČE O VLASY</p>
+        <div id="list-hair"></div>
+      </div>
+      <div>
+        <p class="cap" style="margin:0 0 12px;color:#EDEBE6">VOUSY &amp; TRADIČNÍ HOLENÍ</p>
+        <div id="list-beard"></div>
+      </div>
+    </div>
+    <div class="picked" style="display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding:24px 28px;border:1px solid rgba(200,169,126,.4)" aria-live="polite">
+      <div><span class="cap" style="color:#9A9891">Vybráno</span><p id="picked" style="margin:6px 0 0;font-size:17px"></p></div>
+      <button class="btn btn-solid" data-open>Pokračovat k rezervaci</button>
+    </div>
+    <p class="hint">Ceny jsou orientační; přesný ceník potvrdí salon.</p>
+  </section>
+
+  <section id="about" class="wrap" style="padding-bottom:120px">
+    <div class="col3">
+      <div>
+        <p class="cap" style="margin:0 0 28px">01 /</p>
+        <h3 class="disp" style="font-size:28px;margin-bottom:18px">Horký ručník</h3>
+        <p class="muted" style="margin:0;font-size:15px">Tradiční italská technika napaření pleti před holením pro maximální komfort.</p>
+      </div>
+      <div>
+        <p class="cap" style="margin:0 0 28px">02 /</p>
+        <h3 class="disp" style="font-size:28px;margin-bottom:18px">Břitva &amp; fade</h3>
+        <p class="muted" style="margin:0;font-size:15px">Precizní přechody strojkem a klasické holení břitvou od zkušených barberů.</p>
+      </div>
+      <div>
+        <p class="cap" style="margin:0 0 28px">03 /</p>
+        <h3 class="disp" style="font-size:28px;margin-bottom:18px">Prémiová kosmetika</h3>
+        <p class="muted" style="margin:0;font-size:15px">Kvalitní produkty pro péči o vlasy a vousy, které vydrží i po odchodu ze salonu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="wrap" style="padding-bottom:120px">
+    <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:40px;gap:24px;flex-wrap:wrap">
+      <h2 class="disp sec-h" style="font-size:56px">Galerie</h2>
+      <p class="muted" style="margin:0;max-width:360px;font-size:14px">Střihy, detaily interiéru a práce našich mistrů.</p>
+    </div>
+    <div class="bento">
+      <div class="tile t1" role="img" aria-label="Fade, detail">[FADE · detail]</div>
+      <div class="tile t2" role="img" aria-label="Úprava vousů">[VOUSY · kontura]</div>
+      <div class="tile" role="img" aria-label="Nástroje">[NÁSTROJE]</div>
+      <div class="tile" role="img" aria-label="Interiér">[INTERIÉR]</div>
+      <div class="tile" role="img" aria-label="Holení břitvou">[HOLENÍ]</div>
+      <div class="tile" role="img" aria-label="Mistr při práci">[MISTR]</div>
+      <div class="tile" role="img" aria-label="Kožené křeslo">[KŘESLO]</div>
+      <div class="tile" role="img" aria-label="Detail střihu">[STŘIH · detail]</div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="wrap two" style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding-bottom:120px;border-top:1px solid rgba(255,255,255,.08);padding-top:96px">
+    <div>
+      <p class="cap" style="margin:0 0 16px">Rezervace</p>
+      <h2 class="disp sec-h" style="font-size:56px;margin-bottom:32px">Zarezervovat termín</h2>
+      <p class="muted" style="max-width:440px;margin:0 0 40px">Vyberte službu, mistra a čas. Rezervaci odešleme rovnou do WhatsAppu salonu <span data-bind="name" style="color:#EDEBE6"></span>.</p>
+      <div class="ctas" style="display:flex;gap:16px;flex-wrap:wrap">
+        <button class="btn btn-solid" data-open>Rezervovat online</button>
+        <a class="btn wa" data-bind="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" data-bind="telLink" href="#">Zavolat</a>
+      </div>
+    </div>
+    <div>
+      <p class="cap" style="margin:0 0 16px">Kontakt</p>
+      <h2 class="disp sec-h" data-bind="streetH" style="font-size:56px;margin-bottom:32px"></h2>
+      <div class="mapbox"><iframe id="map" title="Mapa salonu" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <div style="display:grid;margin-top:32px;border-top:1px solid rgba(255,255,255,.08)">
+        <div class="line"><span class="muted">Adresa</span><span data-bind="addrFull" style="text-align:right"></span></div>
+        <div class="line"><span class="muted">Telefon</span><a data-bind="telLink" data-bind-text="phoneDisp" href="#"></a></div>
+      </div>
+      <a class="btn" data-bind="mapLink" href="#" target="_blank" rel="noopener" style="margin-top:32px">Otevřít v Google Mapách</a>
+    </div>
+  </section>
+
+  <footer class="foot" style="display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap">
+    <span data-bind="nameFoot">BARBER &amp; CO. PRAGUE</span>
+    <span data-bind="addrFoot">Mánesova, Praha 2</span>
+    <span>© 2026</span>
+  </footer>
+</div>
+
+<!-- Booking modal -->
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+  <div class="modal">
+    <div class="mhead">
+      <div>
+        <p class="cap" style="margin:0 0 10px" data-bind="name">BARBER &amp; CO.</p>
+        <h2 class="disp" id="mtitle" style="font-size:32px">Rezervace</h2>
+      </div>
+      <button class="x" id="mclose" aria-label="Zavřít">&times;</button>
+    </div>
+    <div class="sum"><span id="m-sum" style="font-size:16px"></span><span id="m-price" class="price"></span></div>
+    <form id="form" novalidate>
+      <div class="grid2">
+        <div class="field" style="grid-column:1/-1"><label class="lbl" for="f-service">Služba</label>
+          <select id="f-service" class="inp"></select></div>
+        <div class="field" style="grid-column:1/-1"><label class="lbl" for="f-barber">Mistr</label>
+          <select id="f-barber" class="inp">
+            <option>Kterýkoliv volný barber</option>
+            <option>Senior barber</option>
+            <option>Barber</option>
+          </select></div>
+        <div class="field"><label class="lbl" for="f-date">Datum</label><input id="f-date" class="inp" type="date" required></div>
+        <div class="field"><label class="lbl" for="f-time">Čas</label><select id="f-time" class="inp" required></select></div>
+        <div class="field"><label class="lbl" for="f-name">Jméno</label><input id="f-name" class="inp" type="text" autocomplete="name" required></div>
+        <div class="field"><label class="lbl" for="f-phone">Telefon</label><input id="f-phone" class="inp" type="tel" placeholder="+420 …" autocomplete="tel" required></div>
+      </div>
+      <div style="margin-top:32px;display:grid;gap:12px">
+        <button type="submit" class="btn wa" style="width:100%">Objednat přes WhatsApp</button>
+      </div>
+      <p class="hint" id="m-err" style="color:#d9806c;display:none">Vyplňte prosím datum, čas, jméno a telefon.</p>
+      <p class="hint">Otevře se WhatsApp s předvyplněnou zprávou pro salon.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ============ DATABASE: 20 reálných pražských barbershopů ============
+   phone = mobilní číslo (bez +420), ověřeno na webu salonu / v rezervačním systému. */
+var BARBERS = {
+  'gbc-miru':   {name:"Gentlemen's Barber Club",   area:'Vinohrady',  praha:2,  street:'Náměstí Míru 1356/8',      zip:'120 00', city:'Praha 2',  phone:'775999995'},
+  'mybarber':   {name:'My Barber',                 area:'Vinohrady',  praha:10, street:'Francouzská 765/50',       zip:'101 00', city:'Praha 10', phone:'734466055'},
+  'rebell':     {name:'Rebell Barbers Karlín',     area:'Karlín',     praha:8,  street:'Sokolovská 47/73',         zip:'186 00', city:'Praha 8',  phone:'608659999'},
+  'authentic':  {name:'Authentic Barber Shop',     area:'Karlín',     praha:8,  street:'Křižíkova 28',             zip:'186 00', city:'Praha 8',  phone:'774393918'},
+  'dapera':     {name:'Dapera Barber',             area:'Holešovice', praha:7,  street:'Plynární 31',              zip:'170 00', city:'Praha 7',  phone:'777511169'},
+  'kingofkings':{name:'King of Kings Barbershop',  area:'Holešovice', praha:7,  street:'Poupětova 1331/12',        zip:'170 00', city:'Praha 7',  phone:'737567743'},
+  'gbc-seifertova':{name:"Gentlemen's Barber Club Žižkov",area:'Žižkov',praha:3, street:'Seifertova 995/29',        zip:'130 00', city:'Praha 3',  phone:'776798798'},
+  'sharks':     {name:"Shark's Barber Žižkov",     area:'Žižkov',     praha:3,  street:'Hartigova 1626/177',       zip:'130 00', city:'Praha 3',  phone:'776181637'},
+  'deluxe':     {name:'Barbershop De Luxe',        area:'Smíchov',    praha:5,  street:'Zborovská 12',             zip:'150 00', city:'Praha 5',  phone:'775202072'},
+  'american':   {name:'American Barber in Prague', area:'Smíchov',    praha:5,  street:'Na Bělidle 813/12',        zip:'150 00', city:'Praha 5',  phone:'608496648'},
+  'gbc-lidicka':{name:"Gentlemen's Barber Club Smíchov",area:'Smíchov',praha:5, street:'Lidická 400/39',           zip:'150 00', city:'Praha 5',  phone:'774466664'},
+  'crown':      {name:'The Crown Barbershop Dejvice',area:'Dejvice',  praha:6,  street:'Muchova 237/15',           zip:'160 00', city:'Praha 6',  phone:'606853015'},
+  'marcus':     {name:'Marcus Barbershop',         area:'Dejvice',    praha:6,  street:'Národní obrany 715/16',    zip:'160 00', city:'Praha 6',  phone:'777649127'},
+  'canadian':   {name:'The Canadian Barbershop',   area:'Vršovice',   praha:10, street:'Francouzská 400/112',      zip:'101 00', city:'Praha 10', phone:'723384249'},
+  'flash':      {name:'Flash Barbershop',          area:'Vršovice',   praha:10, street:'Žitomírská 599/38',        zip:'101 00', city:'Praha 10', phone:'723002575'},
+  'thebarber':  {name:'The Barber from Old Town',  area:'Praha 1 – Staré Město',praha:1,street:'Jilská 452/22',    zip:'110 00', city:'Praha 1',  phone:'774352600'},
+  'classic':    {name:'Classic Barber Shop',       area:'Praha 1 – Nové Město',praha:1,street:'Vodičkova 677/10',   zip:'110 00', city:'Praha 1',  phone:'774364454'},
+  'thomas':     {name:"Thomas's Barber Shop",      area:'Praha 1 – Nové Město',praha:1,street:'Panská 4 (Černá růže)',zip:'110 00',city:'Praha 1', phone:'732628948'},
+  'angels':     {name:'Angels Barbershop',         area:'Praha 1 – Václavské nám.',praha:1,street:'Václavské nám. 36',zip:'110 00',city:'Praha 1', phone:'731343088'},
+  'goodtimes':  {name:'Good Times Barber Shop & Tattoo',area:'Praha 1 – Nové Město',praha:1,street:'Soukenická 22',zip:'110 00',city:'Praha 1', phone:'739463372'}
+};
+/* výchozí salon (pokud chybí / neplatí ?f=) – telefon je zástupný z návrhu */
+var DEFAULT = {name:'BARBER & CO.', area:'Vinohrady', praha:2, street:'Mánesova', zip:'120 00', city:'Praha 2', phone:'774123456'};
+
+var SERVICES = [
+  {id:'classic', group:'hair',  name:'Klasický střih vlasů',            desc:'Mytí, střih, styling, kolínská',        duration:45, price:750},
+  {id:'fade',    group:'hair',  name:'Fade & Skin Fade',                desc:'Precizní přechod strojkem a břitvou',   duration:50, price:850},
+  {id:'junior',  group:'hair',  name:'Junior střih (do 12 let)',        desc:'Střih pro nejmenší',                    duration:35, price:550},
+  {id:'beard',   group:'beard', name:'Úprava vousů',                    desc:'Zastřižení, horký ručník, břitva, olej',duration:35, price:590},
+  {id:'shave',   group:'beard', name:'Tradiční holení hlavy břitvou',   desc:'Holení hlavy s horkým ručníkem',        duration:45, price:690},
+  {id:'komplet', group:'beard', name:'KOMPLET: Vlasy + Plná péče o vousy',desc:'Vybraná péče',                        duration:75, price:1190}
+];
+
+(function(){
+  var $ = function(s,r){return (r||document).querySelector(s)};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var kc = function(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' Kč'};
+
+  /* ---- salon z ?f= ---- */
+  var key = '';
+  try { key = (new URLSearchParams(location.search).get('f')||'').trim().toLowerCase(); } catch(e){}
+  var isDefault = !Object.prototype.hasOwnProperty.call(BARBERS,key);
+  var b = isDefault ? DEFAULT : BARBERS[key];
+  var phoneDisp = '+420 '+b.phone.replace(/(\d{3})(\d{3})(\d{3})/,'$1 $2 $3');
+  var addrShort = b.street;
+  var addrFull = b.street+', '+b.zip+' '+b.city+(b.area.indexOf('Praha 1')===0?'':' – '+b.area);
+  var mapQ = encodeURIComponent((isDefault?'':b.name+', ')+b.street+', '+b.zip+' '+b.city+', Česko');
+  var streetName = b.street.replace(/\s*\d.*$/,'').replace(/\s*\(.*$/,'') || b.street;
+  var upName = b.name.toUpperCase();
+  var areaShort = b.area.replace(/^Praha 1 – /,'');
+  var areaCap = (b.area.indexOf('Praha 1')===0 ? 'PRAHA 1' : b.area.toUpperCase()+' • PRAHA');
+  var waBase = 'https://wa.me/420'+b.phone;
+
+  var V = {
+    name: upName, nameFoot: upName+' · PRAHA', tagline: areaCap,
+    heroCap: 'PÁNSKÉ HOLIČSTVÍ • PRAHA '+b.praha,
+    lead: 'Klidné místo '+(b.area.indexOf('Praha 1')===0?'v centru Prahy':'v lokalitě '+b.area)+' pro muže, kteří ocení precizní fade, klasické holení břitvou a osobní přístup bez kompromisů.',
+    area: b.area, addrShort: addrShort, addrFull: addrFull, addrFoot: b.street+', '+b.city,
+    streetH: streetName, phoneDisp: phoneDisp
+  };
+  $$('[data-bind]').forEach(function(el){
+    var k = el.getAttribute('data-bind');
+    if (k==='telLink'){ el.setAttribute('href','tel:+420'+b.phone); var t=el.getAttribute('data-bind-text'); if(t) el.textContent=V[t]; }
+    else if (k==='waLink'){ el.setAttribute('href', waBase+'?text='+encodeURIComponent('Dobrý den, rád bych se u vás objednal.')); }
+    else if (k==='mapLink'){ el.setAttribute('href','https://www.google.com/maps/search/?api=1&query='+mapQ); }
+    else if (k in V){ el.textContent = V[k]; }
+  });
+  $('#map').src = 'https://maps.google.com/maps?q='+mapQ+'&hl=cs&z=16&output=embed';
+  document.title = (isDefault?'BARBER & CO.':b.name)+' — Pánské holičství '+(b.area.indexOf('Praha 1')===0?'Praha 1':b.area+', Praha');
+  var md = document.querySelector('meta[name=description]');
+  if (md) md.content = b.name+' – pánské holičství, '+addrFull+'. Rezervace přes WhatsApp.';
+
+  /* ---- ceník ---- */
+  var picked = 'fade';
+  function byId(id){ return SERVICES.filter(function(s){return s.id===id})[0] || SERVICES[1]; }
+  function renderList(){
+    ['hair','beard'].forEach(function(g){
+      $('#list-'+g).innerHTML = SERVICES.filter(function(s){return s.group===g}).map(function(s){
+        var on = s.id===picked;
+        return '<div class="row"><div><h3>'+s.name.replace(/&/g,'&amp;')+'</h3><p>'+s.desc+' · '+s.duration+' min</p></div>'+
+          '<div class="rprice"><span class="price">'+kc(s.price)+'</span>'+
+          '<button class="rv'+(on?' on':'')+'" data-svc="'+s.id+'">'+(on?'Vybráno':'Rezervovat')+'</button></div></div>';
+      }).join('');
+    });
+    var s = byId(picked);
+    $('#picked').innerHTML = s.name.replace(/&/g,'&amp;')+' · '+s.duration+' min · <span style="color:#C8A97E">'+kc(s.price)+'</span>';
+  }
+  renderList();
+  document.addEventListener('click', function(e){
+    var r = e.target.closest('[data-svc]');
+    if (r){ picked = r.getAttribute('data-svc'); renderList(); openModal(); return; }
+    if (e.target.closest('[data-open]')) openModal();
+  });
+
+  /* ---- modal ---- */
+  var ov = $('#ov'), form = $('#form'), fs = $('#f-service'), fd = $('#f-date'), ft = $('#f-time');
+  fs.innerHTML = SERVICES.map(function(s){return '<option value="'+s.id+'">'+s.name+' — '+kc(s.price)+'</option>'}).join('');
+  var times=[]; for (var h=9; h<=19; h++){ times.push(('0'+h).slice(-2)+':00'); if(h<19) times.push(('0'+h).slice(-2)+':30'); }
+  ft.innerHTML = '<option value="">Vyberte čas</option>'+times.map(function(t){return '<option>'+t+'</option>'}).join('');
+  function iso(d){ return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  function sync(){ var s=byId(fs.value); $('#m-sum').textContent=s.name+' · '+s.duration+' min'; $('#m-price').textContent=kc(s.price); }
+  fs.addEventListener('change', function(){ picked=fs.value; renderList(); sync(); });
+  var lastFocus=null;
+  function openModal(){
+    lastFocus=document.activeElement;
+    fs.value=picked; sync();
+    var today=new Date(); fd.min=iso(today);
+    if(!fd.value){ var t=new Date(today.getTime()+864e5); fd.value=iso(t); }
+    $('#m-err').style.display='none';
+    ov.classList.add('open'); document.body.style.overflow='hidden';
+    setTimeout(function(){ fd.focus(); },30);
+  }
+  function closeModal(){ ov.classList.remove('open'); document.body.style.overflow=''; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+  $('#mclose').addEventListener('click', closeModal);
+  ov.addEventListener('click', function(e){ if(e.target===ov) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&ov.classList.contains('open')) closeModal(); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name=$('#f-name'), phone=$('#f-phone'), ok=true;
+    [fd,ft,name,phone].forEach(function(el){ var bad=!el.value.trim(); el.classList.toggle('err',bad); if(bad) ok=false; });
+    $('#m-err').style.display = ok?'none':'block';
+    if(!ok) return;
+    var s=byId(fs.value), p=fd.value.split('-');
+    var when=p[2]+'. '+p[1]+'. '+p[0]+' v '+ft.value;
+    var barber=$('#f-barber').value;
+    var msg='Dobrý den, rád bych se k vám objednal na '+s.name+' ('+kc(s.price).replace(/ /g,' ')+') na '+when+'.'+
+      (barber.indexOf('Kterýkoliv')===0?'':' Preferuji: '+barber+'.')+
+      ' Jmenuji se '+name.value.trim()+', tel. '+phone.value.trim()+'. Děkuji!';
+    window.open(waBase+'?text='+encodeURIComponent(msg),'_blank','noopener');
+  });
+  [fd,ft,$('#f-name'),$('#f-phone')].forEach(function(el){ el.addEventListener('input',function(){el.classList.remove('err')}); });
+})();
+</script>
+</body>
+</html>
